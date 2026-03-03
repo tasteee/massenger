@@ -1,24 +1,24 @@
-export const getTotalMessageCount = (conversations: ConversationT[]): number => {
+export const getTotalMessageCount = (conversations: ThreadT[]): number => {
 	return conversations.reduce((total, conversation) => {
 		return total + conversation.messages.length
 	}, 0)
 }
 
-export const getConversationDisplayName = (conversation: ConversationT): string => {
-	if (conversation.metadata.displayName) {
-		return conversation.metadata.displayName
+export const getConversationDisplayName = (conversation: ThreadT): string => {
+	if (conversation.displayName) {
+		return conversation.displayName
 	}
-	if (conversation.metadata.isGroup) {
-		const participantList = conversation.metadata.participants
+	if (conversation.isGroup) {
+		const participantList = conversation.participants
 			.slice(0, 3)
 			.map((participant) => participant.address)
 			.join(', ')
-		return participantList || conversation.metadata.chatIdentifier
+		return participantList || conversation.chatIdentifier
 	}
-	return conversation.metadata.chatIdentifier
+	return conversation.chatIdentifier
 }
 
-export const getLastMessage = (conversation: ConversationT): MessageT | null => {
+export const getLastMessage = (conversation: ThreadT): MessageT | null => {
 	if (conversation.messages.length === 0) return null
 	return conversation.messages[conversation.messages.length - 1]
 }

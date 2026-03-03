@@ -15,7 +15,7 @@ export default function Home() {
 	const [view, setView] = useState<AppView>('hero')
 	const [backups, setBackups] = useState<BackupT[]>([])
 	const [selectedBackup, setSelectedBackup] = useState<BackupT | null>(null)
-	const [conversations, setConversations] = useState<ConversationT[]>([])
+	const [conversations, setConversations] = useState<ThreadT[]>([])
 
 	const scanBackups = async () => {
 		setView('scanning')
@@ -56,7 +56,7 @@ export default function Home() {
 				return
 			}
 
-			const extractedConversations = data as ConversationT[]
+			const extractedConversations = data as ThreadT[]
 			setConversations(extractedConversations)
 			setView('complete')
 

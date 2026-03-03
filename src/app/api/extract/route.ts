@@ -17,6 +17,25 @@ const appleDateToISO = (appleDate: number | null): string | null => {
 	return new Date(APPLE_EPOCH_MS + appleDate / 1_000_000).toISOString()
 }
 
+const getEmojiFromType = (type: number): string | null => {
+	switch (type) {
+		case 2000:
+			return '❤️'
+		case 2001:
+			return '👍'
+		case 2002:
+			return '👎'
+		case 2003:
+			return '😂'
+		case 2004:
+			return '!!'
+		case 2005:
+			return '❓'
+		default:
+			return null
+	}
+}
+
 /* ------------------------------ route ------------------------------ */
 
 export async function POST(req: Request) {
@@ -141,6 +160,8 @@ export async function POST(req: Request) {
           m.is_from_me      AS is_from_me,
           m.handle_id       AS handle_id,
           m.service         AS service,
+          m.associated_message_guid AS associated_message_guid,
+          m.associated_message_type AS associated_message_type,
           cmj.chat_id       AS chat_id
         FROM message m
         JOIN chat_message_join cmj
@@ -157,6 +178,8 @@ export async function POST(req: Request) {
 			handle_id: number | null
 			service: string
 			chat_id: number
+			associated_message_guid: string | null
+			associated_message_type: number | null
 		}[]
 
 		/* -------- attachments -------- */
@@ -200,24 +223,28 @@ export async function POST(req: Request) {
 
 		/* -------- build conversations -------- */
 
-		const conversations: ConversationT[] = []
+		const conversations: ThreadT[] = []
 
 		for (const chat of chats) {
 			const chatMessages = messages.filter((m) => m.chat_id === chat.chatId)
 
 			if (chatMessages.length === 0) continue
 
-			const conv: ConversationT = {
-				metadata: {
-					chatId: chat.chatId,
-					chatIdentifier: chat.chat_identifier,
-					displayName: chat.display_name,
-					isGroup: chat.style === 43 || !!chat.group_id || !!chat.room_name,
-					participants: participantsByChat.get(chat.chatId) ?? [],
-					exportedAt: new Date().toISOString(),
-					source: 'sms.db'
-				},
-				messages: chatMessages.map((m) => ({
+			const msgMap = new Map<string, MessageT>()
+			const reactions: any[] = []
+
+			for (const m of chatMessages) {
+				if (m.associated_message_guid) {
+					reactions.push(m)
+					continue
+				}
+
+				const msgText = m.text ? m.text.replace(/\uFFFC/g, '') : null
+				const msgAttachments = (attachmentsByMessage.get(m.id) ?? []).map((a) => ({ ...a, reactions: [] }))
+
+				if (msgText === null && msgAttachments.length === 0) continue
+
+				const msg: MessageT = {
 					id: m.id,
 					guid: m.guid,
 					timestamp: appleDateToISO(m.date)!,
@@ -227,17 +254,85 @@ export async function POST(req: Request) {
 								isMe: false,
 								handle: m.handle_id ? handleMap.get(m.handle_id) : undefined
 							},
-					text: m.text,
+					text: msgText,
 					service: m.service,
-					attachments: attachmentsByMessage.get(m.id) ?? [],
+					attachments: msgAttachments,
 					flags: {
 						isFromMe: !!m.is_from_me
+					},
+					reactions: []
+				}
+
+				msgMap.set(m.guid, msg)
+			}
+
+			// Apply reactions
+			for (const r of reactions) {
+				const rawGuid = r.associated_message_guid
+				const clean = rawGuid.replace(/^p:\d+\//, '').replace(/^bp:/, '')
+				const target = msgMap.get(rawGuid) ?? msgMap.get(clean)
+
+				if (target) {
+					let emoji = r.associated_message_type ? getEmojiFromType(r.associated_message_type) : null
+
+					if (!emoji && r.text) {
+						// Parsing "Reacted [emoji] to [message]"
+						const match = r.text.match(/^Reacted\s+(.*?)\s+to\s+/)
+						if (match && match[1]) {
+							emoji = match[1]
+						}
+						// Fallback for text-based reaction descriptions (older iOS or missing types)
+						else if (r.text.startsWith('Loved “')) emoji = '❤️'
+						else if (r.text.startsWith('Liked “')) emoji = '👍'
+						else if (r.text.startsWith('Disliked “')) emoji = '👎'
+						else if (r.text.startsWith('Laughed at “')) emoji = '😂'
+						else if (r.text.startsWith('Emphasized “')) emoji = '!!'
+						else if (r.text.startsWith('Questioned “')) emoji = '❓'
 					}
-				}))
+
+					if (emoji) {
+						// Logic to determine if reaction targets an attachment
+						const partMatch = r.associated_message_guid.match(/^p:(\d+)\//)
+						const partIndex = partMatch ? parseInt(partMatch[1], 10) : null
+
+						// If there is a part index and attachments exist, check if it maps to an attachment
+						// Note: This is a simplifying assumption. Often index 0 is first attachment if only attachment exists,
+						// or if text exists, it might be index 0.
+						// If user explicitly asks for attachment reactions, we can try to map p:0 to attachment 0.
+						if (partIndex !== null && target.attachments.length > partIndex) {
+							target.attachments[partIndex].reactions?.push({
+								emoji: emoji,
+								isFromMe: !!r.is_from_me
+							})
+						} else {
+							// Default to message reaction
+							target.reactions.push({
+								emoji: emoji,
+								isFromMe: !!r.is_from_me
+							})
+						}
+					}
+				}
+			}
+
+			const conv: ThreadT = {
+				chatId: chat.chatId,
+				chatIdentifier: chat.chat_identifier,
+				displayName: chat.display_name,
+				isGroup: chat.style === 43 || !!chat.group_id || !!chat.room_name,
+				participants: participantsByChat.get(chat.chatId) ?? [],
+				exportedAt: new Date().toISOString(),
+				source: 'sms.db',
+				messages: Array.from(msgMap.values())
 			}
 
 			conversations.push(conv)
 		}
+
+		/* -------- dev dump -------- */
+
+		const dumpPath = path.join(process.cwd(), 'extracted-data.json')
+		fs.writeFileSync(dumpPath, JSON.stringify(conversations, null, 2))
 
 		console.log(`Extracted ${conversations.length} conversations from backup ${backupId}`)
 		return NextResponse.json(conversations)

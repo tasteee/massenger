@@ -10,6 +10,10 @@ type AttachmentT = {
 	mimeType: string | null
 	transferName?: string | null
 	size?: number | null
+	reactions?: {
+		emoji: string
+		isFromMe: boolean
+	}[]
 }
 
 type MessageT = {
@@ -33,13 +37,10 @@ type MessageT = {
 		isDeleted?: boolean
 	}
 
-	reactions?: ReactionT[]
-}
-
-type ReactionT = {
-	type: 'like' | 'love' | 'laugh' | 'emphasize' | 'question' | string
-	fromMe: boolean
-	handle?: string
+	reactions: {
+		emoji: string
+		isFromMe: boolean
+	}[]
 }
 
 type ParticipantT = {
@@ -47,16 +48,13 @@ type ParticipantT = {
 	address: string // phone number or Apple ID
 }
 
-type ConversationT = {
-	metadata: {
-		chatId: number
-		chatIdentifier: string
-		displayName: string | null
-		isGroup: boolean
-		participants: ParticipantT[]
-		exportedAt: string // ISO
-		source: 'sms.db'
-	}
-
+type ThreadT = {
+	chatId: number
+	chatIdentifier: string
+	displayName: string | null
+	isGroup: boolean
+	participants: ParticipantT[]
+	exportedAt: string // ISO
+	source: 'sms.db'
 	messages: MessageT[]
 }

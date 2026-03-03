@@ -3,14 +3,14 @@ import { Button } from '@/components/ui/button'
 import { getTotalMessageCount } from '@/lib/conversation-utils'
 
 type CompleteViewProps = {
-	conversations: ConversationT[]
+	conversations: ThreadT[]
 	onLoadDifferent: () => void
 	onOpenDashboard: () => void
 }
 
 const CompleteView = ({ conversations, onLoadDifferent, onOpenDashboard }: CompleteViewProps) => {
 	const totalMessages = getTotalMessageCount(conversations)
-	const groupChats = conversations.filter((conversation) => conversation.metadata.isGroup).length
+	const groupChats = conversations.filter((conversation) => conversation.isGroup).length
 
 	return (
 		<div className="flex flex-col items-center justify-center max-w-lg text-center animate-in fade-in slide-in-from-bottom-8 duration-500 p-8 bg-surface-elevated/30 border border-border rounded-2xl backdrop-blur-md shadow-2xl">
