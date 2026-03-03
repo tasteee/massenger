@@ -1,0 +1,786 @@
+[
+	{
+		"metadata": {
+			"chatId": 1,
+			"chatIdentifier": "chat264815793",
+			"displayName": null,
+			"isGroup": false,
+			"participants": [
+				{ "handleId": 1, "address": "+14155550132" },
+				{ "handleId": 2, "address": "+14085551024" }
+			],
+			"exportedAt": "2026-03-01T18:42:00.000Z",
+			"source": "sms.db"
+		},
+		"messages": [
+			{
+				"id": 1,
+				"guid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+				"timestamp": "2026-02-27T09:14:22.000Z",
+				"text": "Hey! Are you coming to the studio tonight?",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14085551024" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 2,
+				"guid": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+				"timestamp": "2026-02-27T09:15:01.000Z",
+				"text": "Yeah for sure, I'll be there around 8",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "like", "fromMe": false, "handle": "+14085551024" }]
+			},
+			{
+				"id": 3,
+				"guid": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+				"timestamp": "2026-02-27T09:15:44.000Z",
+				"text": "Perfect. Bring your interface, I want to try layering some vocals",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14085551024" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 4,
+				"guid": "d4e5f6a7-b8c9-0123-defa-234567890123",
+				"timestamp": "2026-02-27T09:17:10.000Z",
+				"text": "Will do. Check out this rough mix I did last night",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "rough_mix_v3.m4a",
+						"mimeType": "audio/mp4",
+						"transferName": "rough_mix_v3.m4a",
+						"size": 4872100
+					}
+				],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 5,
+				"guid": "e5f6a7b8-c9d0-1234-efab-345678901234",
+				"timestamp": "2026-02-27T09:22:38.000Z",
+				"text": "Whoa 🔥 the low end hits hard",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14085551024" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "love", "fromMe": true }]
+			},
+			{
+				"id": 6,
+				"guid": "f6a7b8c9-d0e1-2345-fabc-456789012345",
+				"timestamp": "2026-02-27T09:23:02.000Z",
+				"text": "Right? I saturated the 808 and sidechained the kick a little tighter",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 7,
+				"guid": "a7b8c9d0-e1f2-3456-abcd-567890123456",
+				"timestamp": "2026-02-27T09:25:19.000Z",
+				"text": "Nice. I recorded this vocal idea earlier, tell me what you think",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "vocal_idea_hook.aac",
+						"mimeType": "audio/aac",
+						"transferName": "vocal_idea_hook.aac",
+						"size": 1548200
+					}
+				],
+				"sender": { "isMe": false, "handle": "+14085551024" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 8,
+				"guid": "b8c9d0e1-f2a3-4567-bcde-678901234567",
+				"timestamp": "2026-02-27T09:30:55.000Z",
+				"text": "That melody is insane, it fits perfectly over the second verse",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "emphasize", "fromMe": false, "handle": "+14085551024" }]
+			},
+			{
+				"id": 9,
+				"guid": "c9d0e1f2-a3b4-5678-cdef-789012345678",
+				"timestamp": "2026-02-27T09:31:40.000Z",
+				"text": "That's exactly where I was hearing it too!",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14085551024" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 10,
+				"guid": "d0e1f2a3-b4c5-6789-defa-890123456789",
+				"timestamp": "2026-02-27T14:08:33.000Z",
+				"text": "Yo I just set up the mics, come through whenever",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "IMG_4821.HEIC",
+						"mimeType": "image/heic",
+						"transferName": "IMG_4821.HEIC",
+						"size": 2310400
+					}
+				],
+				"sender": { "isMe": false, "handle": "+14085551024" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 11,
+				"guid": "e1f2a3b4-c5d6-7890-efab-901234567890",
+				"timestamp": "2026-02-27T14:12:05.000Z",
+				"text": "On my way, grabbing coffee first. Want anything?",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 12,
+				"guid": "f2a3b4c5-d6e7-8901-fabc-012345678901",
+				"timestamp": "2026-02-27T14:12:28.000Z",
+				"text": "Large oat milk latte 🙏",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14085551024" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "like", "fromMe": true }]
+			},
+			{
+				"id": 13,
+				"guid": "a3b4c5d6-e7f8-9012-abcd-123456789abc",
+				"timestamp": "2026-02-27T14:45:11.000Z",
+				"text": "Here",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 14,
+				"guid": "b4c5d6e7-f8a9-0123-bcde-23456789abcd",
+				"timestamp": "2026-02-27T20:37:58.000Z",
+				"text": "Session was so good tonight, listen to this final bounce",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "session_bounce_final.wav",
+						"mimeType": "audio/wav",
+						"transferName": "session_bounce_final.wav",
+						"size": 18744320
+					}
+				],
+				"sender": { "isMe": false, "handle": "+14085551024" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [
+					{ "type": "love", "fromMe": true },
+					{ "type": "love", "fromMe": false, "handle": "+14085551024" }
+				]
+			},
+			{
+				"id": 15,
+				"guid": "c5d6e7f8-a9b0-1234-cdef-3456789abcde",
+				"timestamp": "2026-02-27T20:40:12.000Z",
+				"text": "We cooked 🔥🔥🔥",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "laugh", "fromMe": false, "handle": "+14085551024" }]
+			}
+		]
+	},
+	{
+		"metadata": {
+			"chatId": 2,
+			"chatIdentifier": "chat937250184",
+			"displayName": "Album Release Team",
+			"isGroup": true,
+			"participants": [
+				{ "handleId": 1, "address": "+14155550132" },
+				{ "handleId": 3, "address": "maya@icloud.com" },
+				{ "handleId": 4, "address": "+14155550199" },
+				{ "handleId": 5, "address": "jordan.k@me.com" }
+			],
+			"exportedAt": "2026-03-01T18:42:00.000Z",
+			"source": "sms.db"
+		},
+		"messages": [
+			{
+				"id": 100,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000001",
+				"timestamp": "2026-02-25T10:00:15.000Z",
+				"text": "Alright team, the album is mixed and mastered. We need to lock in a release date",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 101,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000002",
+				"timestamp": "2026-02-25T10:01:42.000Z",
+				"text": "Finally!! How about March 20th? Gives us three weeks for promo",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "maya@icloud.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [
+					{ "type": "like", "fromMe": true },
+					{ "type": "like", "fromMe": false, "handle": "+14155550199" }
+				]
+			},
+			{
+				"id": 102,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000003",
+				"timestamp": "2026-02-25T10:02:55.000Z",
+				"text": "Works for me. I can start cutting the visualizer videos this week",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550199" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 103,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000004",
+				"timestamp": "2026-02-25T10:04:30.000Z",
+				"text": "March 20 is solid. I'll draft the press release today",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "jordan.k@me.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 104,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000005",
+				"timestamp": "2026-02-25T10:06:18.000Z",
+				"text": "Here's the album artwork — final version",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "album_cover_final.png",
+						"mimeType": "image/png",
+						"transferName": "album_cover_final.png",
+						"size": 8540200
+					}
+				],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [
+					{ "type": "love", "fromMe": false, "handle": "maya@icloud.com" },
+					{ "type": "love", "fromMe": false, "handle": "+14155550199" },
+					{ "type": "love", "fromMe": false, "handle": "jordan.k@me.com" }
+				]
+			},
+			{
+				"id": 105,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000006",
+				"timestamp": "2026-02-25T10:07:01.000Z",
+				"text": "Oh WOW that is stunning",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "maya@icloud.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 106,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000007",
+				"timestamp": "2026-02-25T10:07:45.000Z",
+				"text": "The typography is chef's kiss",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550199" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "laugh", "fromMe": true }]
+			},
+			{
+				"id": 107,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000008",
+				"timestamp": "2026-02-25T14:30:00.000Z",
+				"text": "Just rough-cut the first single's visualizer. Thoughts?",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "visualizer_single1_draft.mp4",
+						"mimeType": "video/mp4",
+						"transferName": "visualizer_single1_draft.mp4",
+						"size": 42150900
+					}
+				],
+				"sender": { "isMe": false, "handle": "+14155550199" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 108,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000009",
+				"timestamp": "2026-02-25T14:38:22.000Z",
+				"text": "This is incredible. The grain overlay is perfect",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "like", "fromMe": false, "handle": "+14155550199" }]
+			},
+			{
+				"id": 109,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000010",
+				"timestamp": "2026-02-25T14:39:50.000Z",
+				"text": "Could we push the color grade a bit warmer in the bridge section though?",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "maya@icloud.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 110,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000011",
+				"timestamp": "2026-02-25T14:41:15.000Z",
+				"text": "Yeah easy fix, I'll have a v2 tonight",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550199" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 111,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000012",
+				"timestamp": "2026-02-25T18:05:33.000Z",
+				"text": "Press release draft attached. Review and let me know edits",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "press_release_v1.pdf",
+						"mimeType": "application/pdf",
+						"transferName": "press_release_v1.pdf",
+						"size": 245800
+					}
+				],
+				"sender": { "isMe": false, "handle": "jordan.k@me.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 112,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000013",
+				"timestamp": "2026-02-25T18:20:10.000Z",
+				"text": "Looks great, just fix the genre tag — \"alternative\" not \"indie rock\"",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 113,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000014",
+				"timestamp": "2026-02-25T18:21:02.000Z",
+				"text": "On it 👍",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "jordan.k@me.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 114,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000015",
+				"timestamp": "2026-02-25T22:14:44.000Z",
+				"text": "V2 visualizer with the warmer bridge",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "visualizer_single1_v2.mp4",
+						"mimeType": "video/mp4",
+						"transferName": "visualizer_single1_v2.mp4",
+						"size": 43820100
+					}
+				],
+				"sender": { "isMe": false, "handle": "+14155550199" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [
+					{ "type": "love", "fromMe": true },
+					{ "type": "love", "fromMe": false, "handle": "maya@icloud.com" }
+				]
+			},
+			{
+				"id": 115,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000016",
+				"timestamp": "2026-02-25T22:18:30.000Z",
+				"text": "That's the one. Lock it in",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "maya@icloud.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "emphasize", "fromMe": true }]
+			},
+			{
+				"id": 116,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000017",
+				"timestamp": "2026-02-26T09:00:00.000Z",
+				"text": "OK so to recap: release March 20, single drops March 6 with visualizer. Jordan sends press release to outlets this Friday. Everyone good?",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 117,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000018",
+				"timestamp": "2026-02-26T09:01:10.000Z",
+				"text": "Good here ✅",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "maya@icloud.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 118,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000019",
+				"timestamp": "2026-02-26T09:01:33.000Z",
+				"text": "Locked 🔒",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550199" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 119,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000020",
+				"timestamp": "2026-02-26T09:02:00.000Z",
+				"text": "All set on my end",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "jordan.k@me.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 120,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000021",
+				"timestamp": "2026-02-26T09:02:22.000Z",
+				"text": "Let's go 🚀",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [
+					{ "type": "like", "fromMe": false, "handle": "maya@icloud.com" },
+					{ "type": "like", "fromMe": false, "handle": "+14155550199" },
+					{ "type": "like", "fromMe": false, "handle": "jordan.k@me.com" }
+				]
+			},
+			{
+				"id": 121,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000022",
+				"timestamp": "2026-02-28T16:00:45.000Z",
+				"text": "Sneak peek of the promotional photos from the shoot today",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "promo_shot_01.jpg",
+						"mimeType": "image/jpeg",
+						"transferName": "promo_shot_01.jpg",
+						"size": 5420300
+					},
+					{
+						"filename": "promo_shot_02.jpg",
+						"mimeType": "image/jpeg",
+						"transferName": "promo_shot_02.jpg",
+						"size": 4980100
+					}
+				],
+				"sender": { "isMe": false, "handle": "maya@icloud.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [
+					{ "type": "love", "fromMe": true },
+					{ "type": "emphasize", "fromMe": false, "handle": "+14155550199" }
+				]
+			},
+			{
+				"id": 122,
+				"guid": "10a1b2c3-d4e5-6789-abcd-100000000023",
+				"timestamp": "2026-02-28T16:03:11.000Z",
+				"text": "These are going to look insane on the socials",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "jordan.k@me.com" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			}
+		]
+	},
+	{
+		"metadata": {
+			"chatId": 3,
+			"chatIdentifier": "chat582041637",
+			"displayName": null,
+			"isGroup": false,
+			"participants": [
+				{ "handleId": 1, "address": "+14155550132" },
+				{ "handleId": 6, "address": "+14155550277" }
+			],
+			"exportedAt": "2026-03-01T18:42:00.000Z",
+			"source": "sms.db"
+		},
+		"messages": [
+			{
+				"id": 200,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000001",
+				"timestamp": "2026-02-26T11:30:00.000Z",
+				"text": "Happy birthday!! 🎂🎉",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 201,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000002",
+				"timestamp": "2026-02-26T11:34:18.000Z",
+				"text": "Thank you!! Means a lot 💛",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "love", "fromMe": true }]
+			},
+			{
+				"id": 202,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000003",
+				"timestamp": "2026-02-26T11:35:02.000Z",
+				"text": "Doing anything fun tonight?",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 203,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000004",
+				"timestamp": "2026-02-26T11:36:45.000Z",
+				"text": "Yeah! Friends are taking me to that new restaurant downtown. You should come",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 204,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000005",
+				"timestamp": "2026-02-26T11:37:20.000Z",
+				"text": "I'm so down! What time?",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 205,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000006",
+				"timestamp": "2026-02-26T11:38:00.000Z",
+				"text": "7:30, reservation is under my name",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "like", "fromMe": true }]
+			},
+			{
+				"id": 206,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000007",
+				"timestamp": "2026-02-26T11:38:30.000Z",
+				"text": "Perfect, see you there 🫶",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 207,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000008",
+				"timestamp": "2026-02-26T19:42:00.000Z",
+				"text": "Running 10 min late, traffic is wild",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 208,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000009",
+				"timestamp": "2026-02-26T19:42:55.000Z",
+				"text": "No worries, we just sat down. Take your time!",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 209,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000010",
+				"timestamp": "2026-02-26T22:15:33.000Z",
+				"text": "That was so much fun!! Look at us",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "IMG_7203.jpg",
+						"mimeType": "image/jpeg",
+						"transferName": "IMG_7203.jpg",
+						"size": 3845200
+					}
+				],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "love", "fromMe": true }]
+			},
+			{
+				"id": 210,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000011",
+				"timestamp": "2026-02-26T22:16:48.000Z",
+				"text": "We look great 😂 send me the video too!",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 211,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000012",
+				"timestamp": "2026-02-26T22:18:10.000Z",
+				"text": null,
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "IMG_7210.MOV",
+						"mimeType": "video/quicktime",
+						"transferName": "IMG_7210.MOV",
+						"size": 28740500
+					}
+				],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "laugh", "fromMe": true }]
+			},
+			{
+				"id": 212,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000013",
+				"timestamp": "2026-02-26T22:19:30.000Z",
+				"text": "The cake reveal moment 😂😂",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "laugh", "fromMe": false, "handle": "+14155550277" }]
+			},
+			{
+				"id": 213,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000014",
+				"timestamp": "2026-02-26T22:20:15.000Z",
+				"text": "I genuinely did not see that coming 💀",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 214,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000015",
+				"timestamp": "2026-02-27T08:15:00.000Z",
+				"text": "Good morning! Still can't believe how good the food was last night. What was the name of that pasta dish you ordered?",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 215,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000016",
+				"timestamp": "2026-02-27T08:22:41.000Z",
+				"text": "Cacio e pepe with black truffle 🤤 it was unreal",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "emphasize", "fromMe": true }]
+			},
+			{
+				"id": 216,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000017",
+				"timestamp": "2026-02-27T08:23:50.000Z",
+				"text": "I need to go back just for that. Also here's the boomerang I took of you blowing out the candles",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "candles_boomerang.mp4",
+						"mimeType": "video/mp4",
+						"transferName": "candles_boomerang.mp4",
+						"size": 1920400
+					}
+				],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [
+					{ "type": "love", "fromMe": false, "handle": "+14155550277" },
+					{ "type": "laugh", "fromMe": false, "handle": "+14155550277" }
+				]
+			},
+			{
+				"id": 217,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000018",
+				"timestamp": "2026-02-27T08:25:10.000Z",
+				"text": "STOP that's so cute 😭 can I post this?",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false }
+			},
+			{
+				"id": 218,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000019",
+				"timestamp": "2026-02-27T08:25:38.000Z",
+				"text": "Go for it! It's your birthday content 😂",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "like", "fromMe": false, "handle": "+14155550277" }]
+			},
+			{
+				"id": 219,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000020",
+				"timestamp": "2026-02-27T12:44:00.000Z",
+				"text": "Posted! Already got so many comments haha. Thanks again for coming last night, it really made my day 💕",
+				"service": "iMessage",
+				"attachments": [
+					{
+						"filename": "screenshot_post.png",
+						"mimeType": "image/png",
+						"transferName": "screenshot_post.png",
+						"size": 1124800
+					}
+				],
+				"sender": { "isMe": false, "handle": "+14155550277" },
+				"flags": { "isFromMe": false, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "love", "fromMe": true }]
+			},
+			{
+				"id": 220,
+				"guid": "20a1b2c3-d4e5-6789-abcd-200000000021",
+				"timestamp": "2026-02-27T12:46:30.000Z",
+				"text": "Wouldn't have missed it for the world. Here's to 27! 🥂",
+				"service": "iMessage",
+				"attachments": [],
+				"sender": { "isMe": true },
+				"flags": { "isFromMe": true, "isRead": true, "isDelivered": true, "isSent": true, "isDeleted": false },
+				"reactions": [{ "type": "love", "fromMe": false, "handle": "+14155550277" }]
+			}
+		]
+	}
+]

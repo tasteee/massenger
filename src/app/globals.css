@@ -3,249 +3,291 @@
 @import 'shadcn/tailwind.css';
 
 @font-face {
-  font-family: 'BandLab Sans';
-  src: url('/fonts/BandLab Sans/default_normal.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+	font-family: 'BandLab Sans';
+	src: url('/fonts/BandLab%20Sans/default_normal.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'BandLab Sans';
-  src: url('/fonts/BandLab Sans/default_medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
+	font-family: 'BandLab Sans';
+	src: url('/fonts/BandLab%20Sans/default_medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
 }
 
 @font-face {
-  font-family: 'BandLab Sans';
-  src: url('/fonts/BandLab Sans/default_normal_italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
+	font-family: 'BandLab Sans';
+	src: url('/fonts/BandLab%20Sans/default_normal_italic.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
 }
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Shadcn standard theme variables */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: 'BandLab Sans', var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
+	/* Shadcn standard theme variables */
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-sans:
+		'BandLab Sans', var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	--font-mono: var(--font-geist-mono);
+	--color-sidebar-ring: var(--sidebar-ring);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar: var(--sidebar);
 
-  /* Extended UX Design System */
-  --color-surface-base: var(--surface-base);
-  --color-surface-elevated: var(--surface-elevated);
-  --color-surface-active: var(--surface-active);
+	--color-ring: var(--ring);
+	--color-input: var(--input);
+	--color-border: var(--border);
 
-  --color-brand-primary: var(--brand-primary);
-  --color-brand-secondary: var(--brand-secondary);
-  --color-brand-accent: var(--brand-accent);
-  --color-link: var(--link);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
 
-  --color-text-primary: var(--foreground);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent: var(--accent);
 
-  /* Refined Shadow / Elevation */
-  --shadow-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-elem: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-float: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-muted: var(--muted);
 
-  /* Advanced Radii */
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: 0.75rem; /* 12px - Standard for cards */
-  --radius-2xl: 1rem; /* 16px - Large containers */
-  --radius-3xl: 1.5rem; /* 24px - Ultra round */
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary: var(--secondary);
 
-  /* Spacing Scale Refinement */
-  --spacing-layout: 1.5rem; /* 24px */
-  --spacing-card: 1.25rem; /* 20px */
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary: var(--primary);
+
+	--color-popover-foreground: var(--popover-foreground);
+	--color-popover: var(--popover);
+
+	--color-card-foreground: var(--card-foreground);
+	--color-card: var(--card);
+
+	/* Extended UX Design System */
+	--color-surface-base: var(--surface-base);
+	--color-surface-elevated: var(--surface-elevated);
+	--color-surface-active: var(--surface-active);
+
+	--color-brand-primary: var(--brand-primary);
+	--color-brand-secondary: var(--brand-secondary);
+	--color-brand-accent: var(--brand-accent);
+	--color-link: var(--link);
+
+	--color-text-primary: var(--foreground);
+	--color-text-secondary: var(--text-secondary);
+	--color-text-muted: var(--text-muted);
+
+	/* Refined Shadow / Elevation */
+	--shadow-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--shadow-elem: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+	--shadow-float: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+	/* Advanced Radii */
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: 0.75rem; /* 12px - Standard for cards */
+	--radius-2xl: 1rem; /* 16px - Large containers */
+	--radius-3xl: 1.5rem; /* 24px - Ultra round */
+
+	/* Spacing Scale Refinement */
+	--spacing-layout: 1.5rem; /* 24px */
+	--spacing-card: 1.25rem; /* 20px */
 }
 
 /* Light Mode (Premium Monochromatic with Accents) */
 :root {
-  --radius: 0.5rem;
+	--radius: 0.5rem;
 
-  --background: #ffffff;
-  --foreground: #09090b;
+	--background: #ffffff;
+	--foreground: #09090b;
 
-  --surface-base: #f8fafc;
-  --surface-elevated: #ffffff;
-  --surface-active: #f1f5f9;
+	--surface-base: #f8fafc;
+	--surface-elevated: #ffffff;
+	--surface-active: #f1f5f9;
 
-  --card: #ffffff;
-  --card-foreground: #09090b;
+	--card: #ffffff;
+	--card-foreground: #09090b;
 
-  --popover: #ffffff;
-  --popover-foreground: #09090b;
+	--popover: #ffffff;
+	--popover-foreground: #09090b;
 
-  --primary: #18181b; 
-  --primary-foreground: #ffffff;
+	--primary: #18181b;
+	--primary-foreground: #ffffff;
 
-  --secondary: #f4f4f5;
-  --secondary-foreground: #18181b;
+	--secondary: #f4f4f5;
+	--secondary-foreground: #18181b;
 
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
+	--muted: #f4f4f5;
+	--muted-foreground: #71717a;
 
-  --accent: #f4f4f5;
-  --accent-foreground: #18181b;
+	--accent: #f4f4f5;
+	--accent-foreground: #18181b;
 
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
+	--destructive: #ef4444;
+	--destructive-foreground: #ffffff;
 
-  --border: #e4e4e7;
-  --input: #e4e4e7;
-  --ring: #18181b;
+	--border: #e4e4e7;
+	--input: #e4e4e7;
+	--ring: #18181b;
 
-  /* Custom Brand Overrides */
-  --brand-primary: #e63946;
-  --brand-secondary: #ffb800;
-  --brand-accent: #a855f7;
-  --link: #2563eb;
+	/* Custom Brand Overrides */
+	--brand-primary: #e63946;
+	--brand-secondary: #ffb800;
+	--brand-accent: #a855f7;
+	--link: #2563eb;
 
-  --text-secondary: #71717a;
-  --text-muted: #a1a1aa;
+	--text-secondary: #71717a;
+	--text-muted: #a1a1aa;
 
-  --sidebar: #f4f4f5;
-  --sidebar-foreground: #18181b;
-  --sidebar-primary: #18181b;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e4e4e7;
-  --sidebar-accent-foreground: #18181b;
-  --sidebar-border: #e4e4e7;
-  --sidebar-ring: #18181b;
+	--sidebar: #f4f4f5;
+	--sidebar-foreground: #18181b;
+	--sidebar-primary: #18181b;
+	--sidebar-primary-foreground: #ffffff;
+	--sidebar-accent: #e4e4e7;
+	--sidebar-accent-foreground: #18181b;
+	--sidebar-border: #e4e4e7;
+	--sidebar-ring: #18181b;
 }
 
 /* Dark Mode (Tiered Dark Surface System) */
 .dark {
-  --background: #000000;
-  --foreground: #ffffff;
+	--background: #000000;
+	--foreground: #ffffff;
 
-  --surface-base: #0c0c0c;
-  --surface-elevated: #1a1a1a;
-  --surface-active: #262626;
+	--surface-base: #0c0c0c;
+	--surface-elevated: #1a1a1a;
+	--surface-active: #262626;
 
-  --card: #0c0c0c;
-  --card-foreground: #ffffff;
+	--card: #0c0c0c;
+	--card-foreground: #ffffff;
 
-  --popover: #0c0c0c;
-  --popover-foreground: #ffffff;
+	--popover: #0c0c0c;
+	--popover-foreground: #ffffff;
 
-  --primary: #ffffff;
-  --primary-foreground: #000000;
+	--primary: #ffffff;
+	--primary-foreground: #000000;
 
-  --secondary: #1a1a1a;
-  --secondary-foreground: #ffffff;
+	--secondary: #1a1a1a;
+	--secondary-foreground: #ffffff;
 
-  --muted: #1a1a1a;
-  --muted-foreground: #a1a1aa;
+	--muted: #1a1a1a;
+	--muted-foreground: #a1a1aa;
 
-  --accent: #1a1a1a;
-  --accent-foreground: #ffffff;
+	--accent: #1a1a1a;
+	--accent-foreground: #ffffff;
 
-  --destructive: #7f1d1d;
-  --destructive-foreground: #f87171;
+	--destructive: #7f1d1d;
+	--destructive-foreground: #f87171;
 
-  --border: #2a2a2a;
-  --input: #2a2a2a;
-  --ring: #d4d4d8;
+	--border: #2a2a2a;
+	--input: #2a2a2a;
+	--ring: #d4d4d8;
 
-  /* Custom Brand Overrides */
-  --brand-primary: #e63946;
-  --brand-secondary: #ffb800;
-  --brand-accent: #a855f7;
-  --link: #3b82f6;
+	/* Custom Brand Overrides */
+	--brand-primary: #e63946;
+	--brand-secondary: #ffb800;
+	--brand-accent: #a855f7;
+	--link: #3b82f6;
 
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
+	--text-secondary: #a1a1aa;
+	--text-muted: #71717a;
 
-  --sidebar: #0c0c0c;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #ffffff;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: #1a1a1a;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #2a2a2a;
-  --sidebar-ring: #d4d4d8;
+	--sidebar: #0c0c0c;
+	--sidebar-foreground: #ffffff;
+	--sidebar-primary: #ffffff;
+	--sidebar-primary-foreground: #000000;
+	--sidebar-accent: #1a1a1a;
+	--sidebar-accent-foreground: #ffffff;
+	--sidebar-border: #2a2a2a;
+	--sidebar-ring: #d4d4d8;
 }
 
 @layer base {
-  *,
-  ::before,
-  ::after {
-    box-sizing: border-box;
-    border-color: var(--border, currentColor);
-  }
+	*,
+	::before,
+	::after {
+		box-sizing: border-box;
+		border-color: var(--border, currentColor);
+	}
 
-  body {
-    background-color: var(--background);
-    color: var(--foreground);
-    @apply antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+	body {
+		background-color: var(--background);
+		color: var(--foreground);
+		@apply antialiased;
+		font-family:
+			'BandLab Sans',
+			var(--font-geist-sans),
+			-apple-system,
+			BlinkMacSystemFont,
+			'Segoe UI',
+			Roboto,
+			Helvetica,
+			Arial,
+			sans-serif;
+		font-feature-settings:
+			'rlig' 1,
+			'calt' 1;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
 }
 
 @layer utilities {
-  .transition-smooth {
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+	.transition-smooth {
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	}
 }
 
 @layer components {
-  .nav-item-active {
-    @apply bg-surface-active text-foreground transition-smooth;
-  }
+	.nav-item-active {
+		@apply bg-surface-active text-foreground;
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	}
 
-  .card-premium {
-    @apply bg-surface-elevated border border-border rounded-xl overflow-hidden shadow-elem transition-smooth hover:shadow-float;
-  }
+	.card-premium {
+		@apply bg-surface-elevated border border-border rounded-xl overflow-hidden shadow-elem hover:shadow-float;
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	}
 
-  .btn-pill {
-    @apply rounded-full px-6 py-2 font-bold transition-smooth bg-primary text-primary-foreground hover:opacity-90 active:scale-95;
-  }
-  
-  .glass-panel {
-    @apply bg-background/80 backdrop-blur-lg border border-border/50;
-  }
+	.btn-pill {
+		@apply rounded-full px-6 py-2 font-bold bg-primary text-primary-foreground hover:opacity-90 active:scale-95;
+		transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.glass-panel {
+		@apply bg-background/80 backdrop-blur-lg border border-border/50;
+	}
+}
+
+:root {
+	font-family: var(--font-sans);
+}
+
+.sansFont {
+	font-family:
+		'BandLab Sans',
+		var(--font-geist-sans),
+		-apple-system,
+		BlinkMacSystemFont,
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif;
+}
+
+.ConversationsScrollArea,
+.ConversationsScrollArea > div > div {
+	max-width: 360px;
+}
+
+.ConversationsScrollArea > div > div > div {
+	width: 352px;
 }
