@@ -2,9 +2,12 @@
 
 import React, { memo } from 'react'
 import { cn } from '@/lib/utils'
-import { Bookmark, Pen, Share, Play, Image as ImageIcon, Music, Paperclip } from 'lucide-react'
+import { Bookmark, Pen, Share, Play, Image as ImageIcon, Music, Paperclip, StickyNote } from 'lucide-react'
 import { format } from 'date-fns'
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel'
+import { store } from '@/lib/store'
+import { MessageBookmarkPanel } from './MessageBookmarkPanel'
+import { MessageNotesPanel } from './MessageNotesPanel'
 
 type TextMessagePropsT = {
 	message: MessageT
@@ -79,12 +82,26 @@ const TextMessage = memo((props: TextMessagePropsT) => {
 	const isFromMe = props.message.flags.isFromMe
 	const hoverRotateClass = isFromMe ? 'hover:rotate-0.75' : 'hover:-rotate-0.75'
 
+	const activePanelId = store.$activePanelId.use()
+	const openPanel = activePanelId?.startsWith(`${props.message.id}-`) ? activePanelId.split('-')[1] : null
+
+	const handleToggleBookmark = (e: React.MouseEvent) => {
+		e.stopPropagation()
+		store.togglePanel(props.message.id, 'bookmark')
+	}
+
+	const handleToggleNotes = (e: React.MouseEvent) => {
+		e.stopPropagation()
+		store.togglePanel(props.message.id, 'notes')
+	}
+
 	return (
 		<div className={cn('relative flex w-full mb-1', isFromMe ? 'justify-end' : 'justify-start')}>
 			<div
 				className={cn(
-					'group relative max-w-[70%] px-4 py-2 pl-[14px] rounded-2xl text-sm leading-relaxed transition-all duration-200 ease-out transform-gpu will-change-transform hover:scale-[1.02] shadow-sm cursor-default hover:z-10',
-					hoverRotateClass,
+					'group relative max-w-[70%] px-4 py-2 pl-[14px] rounded-2xl text-sm leading-relaxed transition-all duration-200 ease-out transform-gpu will-change-transform shadow-sm cursor-default hover:z-10',
+					!openPanel && 'hover:scale-[1.02]',
+					!openPanel && hoverRotateClass,
 					isFromMe
 						? 'bg-brand-primary/15 dark:bg-brand-primary/[0.75] border border-brand-primary/20 dark:border-brand-primary/25 text-foreground rounded-br-sm origin-bottom-right'
 						: 'bg-surface-elevated border border-border text-foreground rounded-bl-sm origin-bottom-left'
@@ -126,6 +143,31 @@ const TextMessage = memo((props: TextMessagePropsT) => {
 					</p>
 				)}
 
+				{/* Status Badges */}
+				{(props.message.hasBookmarks || props.message.hasNotes) && (
+					<div className="flex gap-2 mt-2 flex-wrap justify-end opacity-90">
+						{props.message.hasBookmarks && (
+							<div className="flex items-center gap-1 bg-brand-primary/20 text-brand-primary px-1.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider">
+								<Bookmark className="w-3 h-3" fill="currentColor" />
+								<span>Bookmark</span>
+							</div>
+						)}
+						{props.message.hasNotes && (
+							<div className="flex items-center gap-1 bg-purple-500/20 text-purple-600 dark:text-purple-400 px-1.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider">
+								<StickyNote className="w-3 h-3" fill="currentColor" />
+								<span>
+									{props.message.notes.length} {props.message.notes.length === 1 ? 'Note' : 'Notes'}
+								</span>
+							</div>
+						)}
+					</div>
+				)}
+
+				{/* Panels */}
+				{openPanel === 'bookmark' && <MessageBookmarkPanel message={props.message} onClose={store.closePanel} />}
+
+				{openPanel === 'notes' && <MessageNotesPanel message={props.message} onClose={store.closePanel} />}
+
 				{/* Reaction Badge */}
 				{props.message.reactions && props.message.reactions.length > 0 && (
 					<div
@@ -154,8 +196,8 @@ const TextMessage = memo((props: TextMessagePropsT) => {
 				{/* Timestamp — slides out from behind the bubble on hover */}
 				<div
 					className={cn(
-						'absolute top-1/2 -translate-y-1/2 overflow-hidden w-max pointer-events-none',
-						isFromMe ? 'right-full mr-3' : 'left-full ml-3'
+						'TextMessageTimestamp absolute top-1/2 -translate-y-1/2 overflow-hidden w-max pointer-events-none',
+						isFromMe ? 'right-full ppp-3 mr-3' : 'left-full ppp-3 ml-3'
 					)}
 				>
 					<div
@@ -178,15 +220,31 @@ const TextMessage = memo((props: TextMessagePropsT) => {
 				{/* Action icons — vertically stacked on the outside edge, fade in on hover */}
 				<div
 					className={cn(
-						'absolute top-1/2 -translate-y-1/2 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out z-10 pointer-events-none group-hover:pointer-events-auto',
+						'TextMessageActions absolute top-1/2 -translate-y-1/2 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out z-10 pointer-events-none group-hover:pointer-events-auto pt-3 pr-3 pb-3',
 						isFromMe ? 'right-0 translate-x-full pl-2' : 'left-0 -translate-x-full pr-2'
 					)}
 				>
-					<button className="p-1.5 rounded-full bg-surface-base border border-border text-muted-foreground hover:text-foreground hover:bg-surface-active shadow-sm transition-colors hover:scale-110 active:scale-95">
-						<Bookmark className="w-3.5 h-3.5" />
+					<button
+						onClick={handleToggleBookmark}
+						className={cn(
+							'p-1.5 rounded-full border border-border shadow-sm transition-all hover:scale-110 active:scale-95',
+							activePanelId === `${props.message.id}-bookmark` || props.message.hasBookmarks
+								? 'bg-brand-primary text-white border-brand-primary/50'
+								: 'bg-surface-base text-muted-foreground hover:text-foreground hover:bg-surface-active'
+						)}
+					>
+						<Bookmark className="w-3.5 h-3.5" fill={props.message.hasBookmarks ? 'currentColor' : 'none'} />
 					</button>
-					<button className="p-1.5 rounded-full bg-surface-base border border-border text-muted-foreground hover:text-foreground hover:bg-surface-active shadow-sm transition-colors hover:scale-110 active:scale-95">
-						<Pen className="w-3.5 h-3.5" />
+					<button
+						onClick={handleToggleNotes}
+						className={cn(
+							'p-1.5 rounded-full border border-border shadow-sm transition-all hover:scale-110 active:scale-95',
+							activePanelId === `${props.message.id}-notes` || props.message.hasNotes
+								? 'bg-purple-600 text-white border-purple-600/50'
+								: 'bg-surface-base text-muted-foreground hover:text-foreground hover:bg-surface-active'
+						)}
+					>
+						<Pen className="w-3.5 h-3.5" fill={props.message.hasNotes ? 'currentColor' : 'none'} />
 					</button>
 					<button className="p-1.5 rounded-full bg-surface-base border border-border text-muted-foreground hover:text-foreground hover:bg-surface-active shadow-sm transition-colors hover:scale-110 active:scale-95">
 						<Share className="w-3.5 h-3.5" />

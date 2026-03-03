@@ -16,6 +16,19 @@ type AttachmentT = {
 	}[]
 }
 
+type BookmarkT = {
+	title: string
+	userId: string
+	createdDate: number
+}
+
+type NoteT = {
+	id: string
+	text: string
+	userId: string
+	createdDate: number
+}
+
 type MessageT = {
 	id: number
 	guid: string
@@ -36,6 +49,11 @@ type MessageT = {
 		isSent?: boolean
 		isDeleted?: boolean
 	}
+
+	hasBookmarks: boolean
+	hasNotes: boolean
+	bookmarks: BookmarkT[]
+	notes: NoteT[]
 
 	reactions: {
 		emoji: string

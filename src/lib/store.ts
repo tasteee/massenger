@@ -1,103 +1,176 @@
 import { datass } from 'datass'
 
-const $isAddingBookmark = datass.boolean(false)
-const $isSelectingRange = datass.boolean(false)
-const $isViewingNotes = datass.boolean(false)
+export const $isSelectingRange = datass.boolean(false)
 
-// hold alll the json for all of the text messages
-// in the active thread. this is what the
-// TextMessageThread component will read from
-// and write to when messages are updated with
-// bookmarks or notes.
-const $messages = datass.array([])
+// State
+export const $threads = datass.array<ThreadT>([]) // All threads
+export const $messages = datass.array<MessageT>([]) // All messages in active thread
+export const $activeThreadId = datass.number(0) // Active thread ID
+export const $events = datass.array<any>([]) // Event log
+export const $thread = datass.object({}) // Active thread
+export const $view = datass.string('hero') // 'hero' | 'scanning' | 'list' | 'extracting' | 'complete' | 'dashboard'
+// Track which message has an open panel and which type
+// Format: `${messageId}-${type}` e.g. "123-bookmark" or "123-notes"
+export const $activePanelId = datass.string('')
 
-// holds all the events that have occured (i.e the
-// user added a bookmark, the user removed a bookmark,
-// the user added a note, etc). this will be used later
-// when we allow a user see a notifications pane that
-// shows like "other user added a note [2 days ago]" etc..."
-const $events = datass.array([])
+export const CURRENT_USER_ID = 'me'
 
-// ===================================
-// -----------------------------------
+// -----------------------------------------------------------------------------
+// Actions
+// -----------------------------------------------------------------------------
 
-type OpenBookmarkEditorEventT = {
-	messageId: number
+const setActiveThread = (thread: ThreadT | null) => {
+	if (!thread) {
+		$thread.set({})
+		$messages.set([])
+		$activeThreadId.set(0)
+		return
+	}
+
+	$thread.set(thread)
+	$messages.set(thread.messages)
+	$activeThreadId.set(thread.chatId)
+	$activePanelId.set('') // reset panel state
+
+	console.log(`Active thread set to: ${thread.displayName || thread.chatIdentifier} (${thread.chatId})`)
+	console.log(`Loaded ${thread.messages.length} messages into state.`)
 }
 
-// When the user has NO bookamrks on a message, clicking the
-// bookmark icon will need to open the bookmark editor UI with
-// an empty title and do not render the delete action. Confirming
-// the ui will commit the bookmark to the message object in $messages.
-// If user does have bookmark on the message, the bookmark icon button will
-// open the same ui but with title filled in and the delete action rendered.
-// When the user clicks the delete action, it will remove the bookmark
-// from the message object in $messages. Clicking the check icon button
-// will update the bookmark title in the message object in $messages.
-const openBookmarkEditor = (event: OpenBookmarkEditorEventT) => {
-	$isAddingBookmark.set(true)
+const populateMessages = (messages: MessageT[]) => {
+	$messages.set(messages)
 }
 
-// I guess this would be used if the user clicks the cancel button in
-// the bookmark editor UI or clicks outside of the UI to close it without saving?
-// Or would this be better off being local state to the message? Idk help me
-// out im just spitballing how I feel this should all work...
-const stopAddingBookmark = () => {
-	$isAddingBookmark.set(false)
+export const useActiveThread = () => {
+	const activeThreadId = $activeThreadId.use()
+	const threads = $threads.use()
+	return threads.find((thread) => thread.chatId === activeThreadId) || null
 }
 
-type AddBookmarkEventT = {
-	bookmarkId?: string
-	messageId: string
-	title: string
-	userId: string
-}
+// Bookmarks
+// -----------------------------------------------------------------------------
 
-// commit a bookmark. If existing bookarm, update it. If
-// new bookmark, append it. If new, generate an id for it
-// and append. If existing, find it by id and update it.
-// Either way, always update or add timestamp.
-const addBookmark = (event: AddBookmarkEventT) => {
+const addBookmark = (messageId: number, title: string) => {
 	$messages.set.by((draft) => {
-		draft.hasBookmarks = true
+		const msg = draft.find((m) => m.id === messageId)
+		if (!msg) return
 
-		if (event.bookmarkId) {
-			// find the existing bookmark by id
-			// update the bookmark title and timestamp
-			// return
+		// Initialize if undefined (safety)
+		if (!msg.bookmarks) msg.bookmarks = []
+
+		const existingIndex = msg.bookmarks.findIndex((b) => b.userId === CURRENT_USER_ID)
+		const newBookmark: BookmarkT = {
+			title,
+			userId: CURRENT_USER_ID,
+			createdDate: Date.now()
 		}
 
-		// create a new bookmark object with id, title, timestamp, and userId
-		// append the new bookmark to the message's bookmarks array
+		if (existingIndex >= 0) {
+			msg.bookmarks[existingIndex] = newBookmark
+		} else {
+			msg.bookmarks.push(newBookmark)
+		}
+
+		msg.hasBookmarks = msg.bookmarks.length > 0
+
+		// Close panel after saving
+		$activePanelId.set('')
 	})
 }
 
-type RemoveBookmarkEventT = {
-	bookmarkId: string
-	messageId: string
-}
-
-const removeBookmark = (event: RemoveBookmarkEventT) => {
+const removeBookmark = (messageId: number) => {
 	$messages.set.by((draft) => {
-		// find the message that matches messageId
-		// find and remove the bookmark matching event.bookmarkId
+		const msg = draft.find((m) => m.id === messageId)
+		if (!msg) return
+
+		if (!msg.bookmarks) return
+
+		msg.bookmarks = msg.bookmarks.filter((b) => b.userId !== CURRENT_USER_ID)
+		msg.hasBookmarks = msg.bookmarks.length > 0
+
+		// Close panel after deleting
+		$activePanelId.set('')
 	})
 }
 
-// for when user selects / activates a thread.
-const populateThread = (messages: []) => {
-	$messages.set(messages)
+// Notes
+// -----------------------------------------------------------------------------
+
+const addNote = (messageId: number, text: string) => {
+	$messages.set.by((draft) => {
+		const msg = draft.find((m) => m.id === messageId)
+		if (!msg) return
+
+		if (!msg.notes) msg.notes = []
+
+		const newNote: NoteT = {
+			id: Math.random().toString(36).substring(2, 9),
+			text,
+			userId: CURRENT_USER_ID,
+			createdDate: Date.now()
+		}
+
+		msg.notes.push(newNote)
+		msg.hasNotes = msg.notes.length > 0
+	})
+}
+
+const editNote = (messageId: number, noteId: string, text: string) => {
+	$messages.set.by((draft) => {
+		const msg = draft.find((m) => m.id === messageId)
+		if (!msg) return
+
+		const note = msg.notes?.find((n) => n.id === noteId)
+		if (note && note.userId === CURRENT_USER_ID) {
+			note.text = text
+		}
+	})
+}
+
+const removeNote = (messageId: number, noteId: string) => {
+	$messages.set.by((draft) => {
+		const msg = draft.find((m) => m.id === messageId)
+		if (!msg) return
+
+		if (!msg.notes) return
+
+		msg.notes = msg.notes.filter((n) => n.id !== noteId)
+		msg.hasNotes = msg.notes.length > 0
+	})
+}
+
+// Panels
+// -----------------------------------------------------------------------------
+
+const togglePanel = (messageId: number, type: 'bookmark' | 'notes') => {
+	const current = $activePanelId.state
+	const target = `${messageId}-${type}`
+
+	if (current === target) {
+		$activePanelId.set('')
+	} else {
+		$activePanelId.set(target)
+	}
+}
+
+const closePanel = () => {
+	$activePanelId.set('')
 }
 
 export const store = {
 	$messages,
+	$threads,
 	$events,
 	$isSelectingRange,
-	$isViewingNotes,
-	$isAddingBookmark,
-	openBookmarkEditor,
-	stopAddingBookmark,
+	$activePanelId,
+	$thread,
+	$activeThreadId,
+	setActiveThread,
+	populateMessages,
 	addBookmark,
 	removeBookmark,
-	populateThread
+	addNote,
+	editNote,
+	removeNote,
+	togglePanel,
+	closePanel
 }

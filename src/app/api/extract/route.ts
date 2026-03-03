@@ -260,6 +260,10 @@ export async function POST(req: Request) {
 					flags: {
 						isFromMe: !!m.is_from_me
 					},
+					hasBookmarks: false,
+					hasNotes: false,
+					bookmarks: [],
+					notes: [],
 					reactions: []
 				}
 

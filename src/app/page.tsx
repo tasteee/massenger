@@ -8,38 +8,38 @@ import BackupListView from '@/components/views/BackupListView'
 import ExtractingView from '@/components/views/ExtractingView'
 import CompleteView from '@/components/views/CompleteView'
 import DashboardView from '@/components/views/DashboardView'
+import { $threads, $view } from '@/lib/store'
 
 type AppView = 'hero' | 'scanning' | 'list' | 'extracting' | 'complete' | 'dashboard'
 
 export default function Home() {
-	const [view, setView] = useState<AppView>('hero')
+	const view = $view.use()
 	const [backups, setBackups] = useState<BackupT[]>([])
 	const [selectedBackup, setSelectedBackup] = useState<BackupT | null>(null)
-	const [conversations, setConversations] = useState<ThreadT[]>([])
 
 	const scanBackups = async () => {
-		setView('scanning')
+		$view.set('scanning')
 		try {
 			const res = await fetch('/api/backups')
 			const data = await res.json()
 
 			if (res.ok && data.backups) {
 				setBackups(data.backups)
-				setView('list')
+				$view.set('list')
 			} else {
 				toast.error('Failed to scan backups', { description: data.error || 'Unknown error' })
-				setView('hero')
+				$view.set('hero')
 			}
 		} catch (error) {
 			console.error(error)
 			toast.error('Network error during scan')
-			setView('hero')
+			$view.set('hero')
 		}
 	}
 
 	const extractBackup = async (backup: BackupT) => {
 		setSelectedBackup(backup)
-		setView('extracting')
+		$view.set('extracting')
 
 		try {
 			const res = await fetch('/api/extract', {
@@ -47,33 +47,34 @@ export default function Home() {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ backupId: backup.id })
 			})
+
 			const data = await res.json()
 
 			if (!res.ok) {
 				toast.error('Extraction failed', { description: data.error || 'Unknown error' })
-				setView('list')
+				$view.set('list')
 				setSelectedBackup(null)
 				return
 			}
 
-			const extractedConversations = data as ThreadT[]
-			setConversations(extractedConversations)
-			setView('complete')
+			const extractedThreads = data as ThreadT[]
+			$threads.set(extractedThreads)
+			$view.set('complete')
 
-			const totalMessages = extractedConversations.reduce((total, c) => total + c.messages.length, 0)
+			const totalMessages = extractedThreads.reduce((total, c) => total + c.messages.length, 0)
 			toast.success('Database extracted successfully!', {
-				description: `${extractedConversations.length} conversations, ${totalMessages.toLocaleString()} messages.`
+				description: `${extractedThreads.length} conversations, ${totalMessages.toLocaleString()} messages.`
 			})
 		} catch (error) {
 			console.error(error)
 			toast.error('Network error during extraction')
-			setView('list')
+			$view.set('list')
 			setSelectedBackup(null)
 		}
 	}
 
 	if (view === 'dashboard') {
-		return <DashboardView conversations={conversations} onBack={() => setView('complete')} />
+		return <DashboardView />
 	}
 
 	return (
@@ -86,14 +87,10 @@ export default function Home() {
 			<div className="w-full max-w-4xl mx-auto flex items-center justify-center z-10 p-6 min-h-[600px]">
 				{view === 'hero' && <HeroView onScan={scanBackups} />}
 				{view === 'scanning' && <ScanningView />}
-				{view === 'list' && <BackupListView backups={backups} onSelectBackup={extractBackup} onBack={() => setView('hero')} />}
+				{view === 'list' && <BackupListView backups={backups} onSelectBackup={extractBackup} onBack={() => $view.set('hero')} />}
 				{view === 'extracting' && <ExtractingView selectedBackup={selectedBackup} />}
 				{view === 'complete' && (
-					<CompleteView
-						conversations={conversations}
-						onLoadDifferent={() => setView('list')}
-						onOpenDashboard={() => setView('dashboard')}
-					/>
+					<CompleteView onLoadDifferent={() => $view.set('list')} onOpenDashboard={() => $view.set('dashboard')} />
 				)}
 			</div>
 		</main>

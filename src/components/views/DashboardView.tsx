@@ -6,18 +6,15 @@ import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { getTotalMessageCount, getConversationDisplayName, getLastMessage, formatTimestamp } from '@/lib/conversation-utils'
 import TextMessageThread from './TextMessageThread'
+import { $activeThreadId, $threads, $view, store, useActiveThread } from '@/lib/store'
 
-type DashboardViewProps = {
-	conversations: ThreadT[]
-	onBack: () => void
-}
+const DashboardView = () => {
+	const threads = $threads.use()
+	const activeThread = useActiveThread()
 
-const DashboardView = ({ conversations, onBack }: DashboardViewProps) => {
-	const [activeConversation, setActiveConversation] = useState<ThreadT | null>(null)
-
-	const sortedConversations = [...conversations].sort((conversationA, conversationB) => {
-		const lastMessageA = getLastMessage(conversationA)
-		const lastMessageB = getLastMessage(conversationB)
+	const sortedThreads = [...threads].sort((threadA, threadB) => {
+		const lastMessageA = getLastMessage(threadA)
+		const lastMessageB = getLastMessage(threadB)
 		if (!lastMessageA) return 1
 		if (!lastMessageB) return -1
 		return new Date(lastMessageB.timestamp).getTime() - new Date(lastMessageA.timestamp).getTime()
@@ -27,14 +24,19 @@ const DashboardView = ({ conversations, onBack }: DashboardViewProps) => {
 		<div className="w-full h-screen flex flex-col bg-background">
 			{/* Top Bar */}
 			<div className="flex items-center gap-4 px-6 h-14 border-b border-border shrink-0">
-				<Button variant="ghost" size="sm" onClick={onBack} className="text-muted-foreground hover:text-foreground gap-2">
+				<Button
+					variant="ghost"
+					size="sm"
+					onClick={() => $view.set('hero')}
+					className="text-muted-foreground hover:text-foreground gap-2"
+				>
 					<ArrowLeft className="h-4 w-4" />
 					Back
 				</Button>
 				<div className="h-4 w-px bg-border" />
 				<span className="text-sm font-semibold text-foreground">massenger</span>
 				<span className="text-xs text-muted-foreground ml-1">
-					{conversations.length} conversations · {getTotalMessageCount(conversations).toLocaleString()} messages
+					{threads.length} conversations · {getTotalMessageCount(threads).toLocaleString()} messages
 				</span>
 			</div>
 
@@ -44,15 +46,15 @@ const DashboardView = ({ conversations, onBack }: DashboardViewProps) => {
 				<div className="w-[360px] border-r border-border flex flex-col bg-surface-base shrink-0 overflow-hidden">
 					<ScrollArea className="ConversationsScrollArea flex-1 w-full">
 						<div className="p-2 space-y-0.5">
-							{sortedConversations.map((conversation) => {
-								const lastMessage = getLastMessage(conversation)
-								const isActive = activeConversation?.chatId === conversation.chatId
-								const displayName = getConversationDisplayName(conversation)
+							{sortedThreads.map((thread) => {
+								const lastMessage = getLastMessage(thread)
+								const isActive = activeThread?.chatId === thread.chatId
+								const displayName = getConversationDisplayName(thread)
 
 								return (
 									<button
-										key={conversation.chatId}
-										onClick={() => setActiveConversation(conversation)}
+										key={thread.chatId}
+										onClick={() => store.setActiveThread(thread)}
 										className={`w-full flex items-center gap-3 p-3 rounded-xl text-left transition-all duration-150 group ${
 											isActive ? 'bg-surface-active' : 'hover:bg-surface-elevated'
 										}`}
@@ -63,7 +65,7 @@ const DashboardView = ({ conversations, onBack }: DashboardViewProps) => {
 												isActive ? 'bg-brand-primary/10 border-brand-primary/20' : 'bg-surface-active border-border'
 											}`}
 										>
-											{conversation.isGroup ? (
+											{thread.isGroup ? (
 												<Users className="h-4 w-4 text-muted-foreground" />
 											) : (
 												<User className="h-4 w-4 text-muted-foreground" />
@@ -85,7 +87,7 @@ const DashboardView = ({ conversations, onBack }: DashboardViewProps) => {
 														: lastMessage.attachments.length > 0
 															? `📎 ${lastMessage.attachments[0].transferName || 'Attachment'}`
 															: '(no content)'
-													: `${conversation.messages.length} message${conversation.messages.length === 1 ? '' : 's'}`}
+													: `${thread.messages.length} message${thread.messages.length === 1 ? '' : 's'}`}
 											</p>
 										</div>
 									</button>
@@ -97,7 +99,7 @@ const DashboardView = ({ conversations, onBack }: DashboardViewProps) => {
 
 				{/* Message Thread */}
 				<div className="flex-1 flex flex-col overflow-hidden">
-					{activeConversation === null ? (
+					{activeThread === null ? (
 						<div className="flex-1 flex flex-col items-center justify-center text-center text-muted-foreground gap-4">
 							<MessageSquare className="h-12 w-12 opacity-20" />
 							<div>
@@ -106,7 +108,7 @@ const DashboardView = ({ conversations, onBack }: DashboardViewProps) => {
 							</div>
 						</div>
 					) : (
-						<TextMessageThread conversation={activeConversation} />
+						<TextMessageThread />
 					)}
 				</div>
 			</div>

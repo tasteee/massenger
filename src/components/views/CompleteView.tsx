@@ -1,16 +1,17 @@
 import { CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { getTotalMessageCount } from '@/lib/conversation-utils'
+import { $threads } from '@/lib/store'
 
 type CompleteViewProps = {
-	conversations: ThreadT[]
 	onLoadDifferent: () => void
 	onOpenDashboard: () => void
 }
 
-const CompleteView = ({ conversations, onLoadDifferent, onOpenDashboard }: CompleteViewProps) => {
-	const totalMessages = getTotalMessageCount(conversations)
-	const groupChats = conversations.filter((conversation) => conversation.isGroup).length
+const CompleteView = ({ onLoadDifferent, onOpenDashboard }: CompleteViewProps) => {
+	const threads = $threads.use()
+	const totalMessages = getTotalMessageCount(threads)
+	const groupChats = threads.filter((thread) => thread.isGroup).length
 
 	return (
 		<div className="flex flex-col items-center justify-center max-w-lg text-center animate-in fade-in slide-in-from-bottom-8 duration-500 p-8 bg-surface-elevated/30 border border-border rounded-2xl backdrop-blur-md shadow-2xl">
@@ -23,7 +24,7 @@ const CompleteView = ({ conversations, onLoadDifferent, onOpenDashboard }: Compl
 
 			<div className="grid grid-cols-3 gap-4 w-full mb-8">
 				<div className="bg-surface-active p-4 rounded-xl border border-border">
-					<div className="text-3xl font-bold text-foreground mb-1">{conversations.length.toLocaleString()}</div>
+					<div className="text-3xl font-bold text-foreground mb-1">{threads.length.toLocaleString()}</div>
 					<div className="text-xs text-muted-foreground uppercase tracking-wider font-medium">Conversations</div>
 				</div>
 				<div className="bg-surface-active p-4 rounded-xl border border-border">

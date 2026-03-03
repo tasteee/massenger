@@ -8,14 +8,15 @@ import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { getConversationDisplayName } from '@/lib/conversation-utils'
 import { TextMessage } from './TextMessage'
+import { store } from '@/lib/store'
 
-interface TextMessageThreadProps {
-	conversation: ThreadT
-}
+interface TextMessageThreadProps {}
 
-const TextMessageThread = ({ conversation }: TextMessageThreadProps) => {
+const TextMessageThread = ({}: TextMessageThreadProps) => {
 	const parentRef = useRef<HTMLDivElement>(null)
-	const messages = conversation.messages
+
+	const conversation = store.$thread.use()
+	const messages = store.$messages.use()
 	const count = messages.length
 
 	const [searchQuery, setSearchQuery] = useState('')
@@ -31,10 +32,10 @@ const TextMessageThread = ({ conversation }: TextMessageThreadProps) => {
 
 	// Scroll to bottom when conversation changes
 	useLayoutEffect(() => {
-		if (count > 0) {
+		if (count > 0 && conversation) {
 			virtualizer.scrollToIndex(count - 1, { align: 'end' })
 		}
-	}, [conversation.chatId])
+	}, [conversation?.chatId])
 
 	useEffect(() => {
 		if (!searchQuery.trim()) {
@@ -60,6 +61,8 @@ const TextMessageThread = ({ conversation }: TextMessageThreadProps) => {
 		setSearchResults(results)
 		setIsSearchOpen(true)
 	}, [searchQuery, messages])
+
+	if (!conversation) return null
 
 	const handleResultClick = (index: number) => {
 		virtualizer.scrollToIndex(index, { align: 'center' })
